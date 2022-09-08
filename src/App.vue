@@ -1,10 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <nav v-if="user !== null"><router-link to="/auth">Home</router-link></nav>
+  <router-view />
 </template>
+
+<script>
+import { mapState, mapActions } from "pinia";
+import userStore from "@/store/user";
+
+export default {
+  name: "App",
+  computed: {
+    ...mapState(userStore, ["user"]),
+  },
+  methods: {
+    ...mapActions(userStore, ["fetchUser"]),
+  },
+
+  async created() {
+    try {
+      await this.fetchUser(); // here we call fetch user
+      if (!this.user) {
+        // redirect them to logout if the user is not there
+        this.$router.push({ path: "/auth" });
+      } else {
+        // continue to dashboard
+        this.$router.push({ path: "/" });
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  watch: {
+    user() {
+      if (this.user) {
+        this.$router.push({ path: "/" });
+      }
+    },
+  },
+};
+</script>
 
 <style>
 #app {
