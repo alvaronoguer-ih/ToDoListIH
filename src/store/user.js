@@ -18,7 +18,7 @@ export default defineStore("userStore", {
         email,
         password,
       });
-      if (error) alert("Contarseña/usuario mala");
+      if (error) alert("Contarseña/usuario incorrecta");
       if (user) this.user = user;
     },
     async signUp(email, password) {

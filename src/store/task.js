@@ -9,11 +9,22 @@ export default defineStore("tasks", {
   }),
   actions: {
     async fetchTasks() {
-      const { data: tasks } = await supabase
+      const { data: tasks, error } = await supabase
         .from("tasks")
         .select("*")
         .order("id", { ascending: false });
+      if (error) throw error;
       this.tasks = tasks;
+    },
+    async insertTask(newTitle, userId, newStatus) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .insert([{ title: newTitle, user_id: userId, is_complete: newStatus }]);
+      if (error) throw error;
+    },
+    async deleteTask(taskId) {
+      const { data, error } = await supabase.from("tasks").delete().match({ id: taskId });
+      if (error) throw error;
     },
   },
 });
