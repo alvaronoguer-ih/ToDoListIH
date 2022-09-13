@@ -12,8 +12,6 @@ export default {
     ...mapActions(userStore, ["signOut"]),
     handleLogOut() {
       this.signOut();
-      console.log("Cierre Sesión solicitado");
-      window.location.reload();
     },
   },
 };

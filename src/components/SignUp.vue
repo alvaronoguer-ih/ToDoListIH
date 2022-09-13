@@ -16,13 +16,17 @@ export default {
   name: "signIn",
   methods: {
     ...mapActions(userStore, ["signUp"]),
-    handleSignUp() {
+    async handleSignUp() {
       const userData = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
       };
       console.log(userData.email);
-      this.signUp(userData.email, userData.password);
+      try {
+        await this.signUp(userData.email, userData.password);
+      } catch (error) {
+        alert("Este usuario ya existe");
+      }
     },
   },
 };

@@ -1,17 +1,29 @@
 <template>
   <table class="table">
     <tr class="title">
-      <th>ID</th>
       <th>Task</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
-    <tr v-for="task in tasks" :key="task.id">
-      <td>{{ task.id }}</td>
-      <td>{{ task.title }}</td>
-      <td v-show="task.is_complete">Done</td>
-      <td v-show="!task.is_complete">To-Do</td>
-      <td><button>Edit</button><button @click="handleDeleteTask(task.id)">Remove</button></td>
+    <tr v-for="task in tasks" :key="tasks.id">
+      <td>
+        <input
+          type="text"
+          class="title"
+          v-model="task.title"
+          :id="task.id"
+          @change="handleEditTitle(task.title, task.id)"
+        />
+      </td>
+      <td>
+        <input
+          @click="handleEditStatus(task.is_complete, task.id)"
+          type="checkbox"
+          v-model="task.is_complete"
+          v-bind:id="task.is_complete"
+        />
+      </td>
+      <td><button @click="handleDeleteTask(task.id)">Remove</button></td>
     </tr>
   </table>
 </template>
@@ -26,10 +38,28 @@ export default {
     ...mapState(taskStore, ["tasks"]),
   },
   methods: {
-    ...mapActions(taskStore, ["deleteTask"]),
+    ...mapActions(taskStore, ["deleteTask", "editStatus", "editTitle"]),
 
     handleDeleteTask(taskId) {
-      this.deleteTask(taskId);
+      try {
+        this.deleteTask(taskId);
+      } catch (error) {
+        alert("Error: ", error.message);
+      }
+    },
+
+    handleEditStatus(task, taskID) {
+      console.log(task, taskID);
+      this.editStatus(!task, taskID);
+    },
+
+    handleEditTitle(title, taskID) {
+      console.log(title, taskID);
+      if (title.length != 0) {
+        this.editTitle(title, taskID);
+      } else {
+        alert("No puedes dejar la tarea vacia");
+      }
     },
   },
   watch: {
@@ -43,6 +73,7 @@ export default {
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: aliceblue;
 }
 
 .img-profile {
@@ -51,6 +82,12 @@ body {
 
 .trofeo {
   width: 50px;
+}
+
+.title {
+  border: 0px;
+  text-align: center;
+  width: 100%;
 }
 
 .btn-zone {
@@ -69,12 +106,13 @@ body {
   width: 70%;
   margin: 0 auto;
   text-align: center;
+  background-color: white;
 }
 
 .title {
   font-weight: bold;
-  line-height: 3em;
-  font-size: 1.2em;
+  line-height: 2em;
+  font-size: 1em;
 }
 
 .picture {

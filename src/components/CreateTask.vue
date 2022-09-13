@@ -1,7 +1,7 @@
 <template>
   <h1>El usuario {{ user.id }} está creando</h1>
-  <textarea id="newTaskTitle" required></textarea>
-  <input type="checkbox" id="statusNewTask" />
+  <textarea v-model="title" required></textarea>
+  <input type="checkbox" v-model="isComplete" />
   <button @click="handleNewTask">Crear tarea</button>
 </template>
 
@@ -15,15 +15,22 @@ export default {
   computed: {
     ...mapState(userStore, ["user"]),
   },
+  data() {
+    return {
+      title: "",
+      isComplete: false,
+    };
+  },
   methods: {
-    ...mapActions(taskStore, ["insertTask"]),
+    ...mapActions(taskStore, ["insertTask", "fetchTasks"]),
     handleNewTask() {
       const taskData = {
-        title: document.getElementById("newTaskTitle").value,
+        title: this.title,
         user_id: this.user.id,
-        is_complete: document.getElementById("statusNewTask").checked,
+        isComplete: this.isComplete,
       };
-      this.insertTask(taskData.title, taskData.user_id, taskData.is_complete);
+      this.insertTask(taskData.title, taskData.user_id, taskData.isComplete);
+      this.fetchTasks();
     },
   },
 };
