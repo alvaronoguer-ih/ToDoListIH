@@ -1,9 +1,9 @@
 // /store/user.js
 
-import { defineStore } from "pinia";
-import supabase from "../supabase/index";
+import { defineStore } from 'pinia';
+import supabase from '../supabase/index';
 
-export default defineStore("userStore", {
+export default defineStore('userStore', {
   state: () => ({
     user: null,
   }),
@@ -18,7 +18,7 @@ export default defineStore("userStore", {
         email,
         password,
       });
-      if (error) alert("Contarseña/usuario incorrecta");
+      if (error) alert('Contarseña/usuario incorrecta');
       if (user) this.user = user;
     },
     async signUp(email, password) {
@@ -40,7 +40,7 @@ export default defineStore("userStore", {
     enabled: true,
     strategies: [
       {
-        key: "user",
+        key: 'user',
         storage: localStorage,
       },
     ],

@@ -1,18 +1,19 @@
 <template>
+  <div class="navbar"></div>
   <router-view />
 </template>
 
 <script>
-import { mapState, mapActions } from "pinia";
-import userStore from "@/store/user";
+import { mapState, mapActions } from 'pinia';
+import userStore from '@/store/user';
 
 export default {
-  name: "App",
+  name: 'App',
   computed: {
-    ...mapState(userStore, ["user"]),
+    ...mapState(userStore, ['user']),
   },
   methods: {
-    ...mapActions(userStore, ["fetchUser"]),
+    ...mapActions(userStore, ['fetchUser']),
   },
 
   async created() {
@@ -25,9 +26,9 @@ export default {
   watch: {
     user() {
       if (!this.user) {
-        this.$router.push({ path: "/auth" });
+        this.$router.push({ path: '/auth' });
       } else {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: '/' });
       }
     },
   },
@@ -43,16 +44,11 @@ export default {
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.navbar {
+  width: 100%;
+  background-color: black;
+  height: 50px;
+  margin-bottom: 10px;
 }
 </style>

@@ -1,28 +1,28 @@
 <template>
   <h1>El usuario {{ user.id }} está creando</h1>
-  <textarea v-model="title" required></textarea>
-  <input type="checkbox" v-model="isComplete" />
-  <button @click="handleNewTask">Crear tarea</button>
+  <textarea aria-label='title' v-model='title' required></textarea>
+  <input aria-label='checkbox' type='checkbox' v-model='isComplete' />
+  <button @click='handleNewTask'>Crear tarea</button>
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import taskStore from "@/store/task";
-import userStore from "@/store/user";
+import { mapActions, mapState } from 'pinia';
+import taskStore from '@/store/task';
+import userStore from '@/store/user';
 
 export default {
-  name: "CreateTask",
+  name: 'CreateTask',
   computed: {
-    ...mapState(userStore, ["user"]),
+    ...mapState(userStore, ['user']),
   },
   data() {
     return {
-      title: "",
+      title: '',
       isComplete: false,
     };
   },
   methods: {
-    ...mapActions(taskStore, ["insertTask", "fetchTasks"]),
+    ...mapActions(taskStore, ['insertTask', 'fetchTasks']),
     handleNewTask() {
       const taskData = {
         title: this.title,
@@ -30,7 +30,6 @@ export default {
         isComplete: this.isComplete,
       };
       this.insertTask(taskData.title, taskData.user_id, taskData.isComplete);
-      this.fetchTasks();
     },
   },
 };
