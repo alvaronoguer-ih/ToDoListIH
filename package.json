@@ -15,8 +15,10 @@
     "core-js": "^3.8.3",
     "pinia": "^2.0.21",
     "pinia-plugin-persist": "^1.0.0",
+    "sweetalert2": "^11.4.33",
     "vue": "^3.2.39",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-sweetalert2": "^5.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -32,8 +34,6 @@
     "eslint-plugin-vuejs-accessibility": "^1.1.0"
   },
   "prettier": {
-    "singleQuote": true,
-    "semi": false,
-    "trailingComma": "none"
+    "singleQuote": true
   }
 }

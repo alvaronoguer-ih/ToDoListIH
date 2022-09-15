@@ -1,5 +1,5 @@
 <template>
-  <button @click='handleLogOut()'>Cerrar Sesión</button>
+  <button class="btn-lo" @click="handleLogOut()">Cerrar Sesión</button>
 </template>
 
 <script>
@@ -17,4 +17,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn-lo {
+  background: #5e5df0;
+  border-radius: 999px;
+  box-shadow: #5e5df0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+</style>

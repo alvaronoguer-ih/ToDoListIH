@@ -1,5 +1,5 @@
 // /store/task.js
-
+/* eslint-disable */
 import { defineStore } from 'pinia';
 import supabase from '../supabase/index';
 
@@ -28,7 +28,7 @@ export default defineStore('tasks', {
       if (error) throw error;
       this.tasks.splice(
         this.tasks.findIndex((task) => task.id === taskId),
-        1,
+        1
       );
     },
 

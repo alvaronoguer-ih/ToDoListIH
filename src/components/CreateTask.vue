@@ -1,8 +1,9 @@
 <template>
-  <h1>El usuario {{ user.id }} está creando</h1>
-  <textarea aria-label='title' v-model='title' required></textarea>
-  <input aria-label='checkbox' type='checkbox' v-model='isComplete' />
-  <button @click='handleNewTask'>Crear tarea</button>
+  <h1>Time to create a new Task</h1>
+  <p>Task Details</p>
+  <input aria-label="title" v-model="title" required /> <br />
+  <input aria-label="checkbox" type="checkbox" v-model="isComplete" /><br />
+  <button @click="handleNewTask">Crear tarea</button>
 </template>
 
 <script>

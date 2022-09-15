@@ -1,12 +1,6 @@
 <template>
-  <h1>Te damos la bienvenida a TwoDo</h1>
-  <div class='dashboard-zone'>
-    <div class='sign-up-zone'>
-      <h2>Join TwoDo</h2>
-      <SignUp />
-    </div>
-    <div class='log-in-zone'>
-      <h2>Login</h2>
+  <div class="bk">
+    <div class="log-in-zone">
       <LogIn />
     </div>
   </div>
@@ -15,11 +9,10 @@
 <script>
 import { mapState } from 'pinia';
 import userStore from '@/store/user';
-import SignUp from '@/components/SignUp.vue';
 import LogIn from '../components/LogIn.vue';
 
 export default {
-  components: { SignUp, LogIn },
+  components: { LogIn },
   name: 'LoginPage',
   computed: {
     ...mapState(userStore, ['user']),
@@ -28,6 +21,14 @@ export default {
 </script>
 
 <style>
+.bk {
+  padding-top: 5%;
+  background-image: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg');
+  background-position: center center;
+  background-size: cover;
+  height: 90vh;
+}
+
 .dashboard-zone {
   display: flex;
   flex-direction: row;
@@ -36,10 +37,9 @@ export default {
   align-items: center;
 }
 
-.sign-up-zone,
 .log-in-zone {
   display: flex;
-  width: 45%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;

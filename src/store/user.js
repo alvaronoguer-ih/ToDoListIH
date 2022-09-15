@@ -18,9 +18,10 @@ export default defineStore('userStore', {
         email,
         password,
       });
-      if (error) alert('Contarseña/usuario incorrecta');
+      if (error) throw error;
       if (user) this.user = user;
     },
+
     async signUp(email, password) {
       const { user, error } = await supabase.auth.signUp({
         email,
