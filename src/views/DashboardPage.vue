@@ -11,14 +11,18 @@
 </template>
 
 <script>
-import { mapActions } from 'pinia';
+import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/task';
+import userStore from '@/store/user';
 import ShowTasks from '../components/ShowTasks.vue';
 import CreateTask from '../components/CreateTask.vue';
 
 export default {
   components: { ShowTasks, CreateTask },
   name: 'DashboardPage',
+  computed: {
+    ...mapState(userStore, ['user']),
+  },
   methods: {
     ...mapActions(taskStore, ['fetchTasks']),
   },
@@ -32,21 +36,43 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .dashboard {
   padding-top: 50px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
   align-items: flex-start;
   justify-content: space-around;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .your-tasks {
   width: 60%;
+  border-radius: 19px;
+  padding: 5%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .create-task {
-  width: 25%;
+  width: 35%;
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    width: 95%;
+    margin: 0 auto;
+    flex-direction: column-reverse;
+  }
+
+  .your-tasks {
+    margin-top: 3%;
+    width: 100%;
+  }
+
+  .create-task {
+    width: 100%;
+  }
 }
 </style>

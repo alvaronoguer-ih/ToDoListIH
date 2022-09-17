@@ -38,6 +38,7 @@ export default defineStore('tasks', {
         .update({ is_complete: newStatus })
         .match({ id: taskID });
       if (error) throw error;
+      this.fetchTasks();
     },
 
     async editTitle(newTitle, taskID) {

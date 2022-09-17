@@ -7,13 +7,7 @@
       /></label>
 
       <label for="password">
-        <input
-          v-show=""
-          type="password"
-          id="password-login"
-          name="password"
-          placeholder="password"
-        />
+        <input type="password" id="password-login" name="password" placeholder="password" />
       </label>
 
       <input class="btn-li" type="submit" value="Log in" @click="handleLogIn()" />
@@ -73,13 +67,10 @@ export default {
   opacity: 1;
   outline: 0 solid transparent;
   padding: 8px 18px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
   width: fit-content;
   word-break: break-word;
   border: 0;
-  padding: 10px 60px 10px 60px;
+  padding: 5px 40px 5px 40px;
 }
 
 .or {
@@ -109,13 +100,10 @@ export default {
   opacity: 1;
   outline: 0 solid transparent;
   padding: 8px 18px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
   width: fit-content;
   word-break: break-word;
   border: 0;
-  padding: 10px 40px 10px 40px;
+  padding: 5px 30px 5px 30px;
 }
 
 .login-area-form {
@@ -137,8 +125,17 @@ export default {
 #email-login,
 #password-login {
   text-align: center;
+  width: 100%;
   margin-top: 5%;
   padding: 10px 60px 10px 60px;
-  border-radius: 50px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+#email-login:focus,
+#password-login:focus {
+  outline: none;
+  border-color: #219ebc;
 }
 </style>

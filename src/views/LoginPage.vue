@@ -1,9 +1,12 @@
-<template>
+<template v-if="!user">
   <div class="bk">
     <div class="log-in-zone">
       <LogIn />
     </div>
   </div>
+  <footer>
+    <h3>Twodo®</h3>
+  </footer>
 </template>
 
 <script>
@@ -20,13 +23,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .bk {
   padding-top: 5%;
   background-image: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg');
   background-position: center center;
   background-size: cover;
-  height: 90vh;
+  height: 85vh;
 }
 
 .dashboard-zone {
@@ -43,5 +46,11 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+footer {
+  background-color: black;
+  padding: 2%;
+  height: 10vh;
 }
 </style>

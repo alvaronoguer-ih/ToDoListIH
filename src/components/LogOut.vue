@@ -10,8 +10,8 @@ export default {
   name: 'LogOut',
   methods: {
     ...mapActions(userStore, ['signOut']),
-    handleLogOut() {
-      this.signOut();
+    async handleLogOut() {
+      await this.signOut();
     },
   },
 };
@@ -37,5 +37,9 @@ export default {
   width: fit-content;
   word-break: break-word;
   border: 0;
+}
+
+.task-status {
+  display: inline-block;
 }
 </style>

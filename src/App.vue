@@ -1,13 +1,12 @@
 <template>
   <div class="navbar">
     <div class="menu-navbar">
-      <h1>TwoDo</h1>
+      <h1>🐙TwoDo</h1>
       <div v-if="user">
         <LogOut />
       </div>
     </div>
   </div>
-  <h2 v-if="user">Hello {{ user.email }}</h2>
   <router-view />
 </template>
 
@@ -46,6 +45,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,6 +64,7 @@ export default {
 .navbar h1 {
   color: white;
   user-select: none;
+  margin-bottom: 0;
 }
 
 h2 {
