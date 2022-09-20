@@ -16,10 +16,12 @@ export default defineStore('tasks', {
       if (error) throw error;
       this.tasks = tasks;
     },
-    async insertTask(newTitle, userId, newStatus) {
+    async insertTask(newTitle, userId, newStatus, deadlineDate) {
       const { error } = await supabase
         .from('tasks')
-        .insert([{ title: newTitle, user_id: userId, is_complete: newStatus }]);
+        .insert([
+          { title: newTitle, user_id: userId, is_complete: newStatus, deadline: deadlineDate },
+        ]);
       if (error) throw error;
       this.fetchTasks();
     },
@@ -44,6 +46,13 @@ export default defineStore('tasks', {
       const { error } = await supabase
         .from('tasks')
         .update({ title: newTitle })
+        .match({ id: taskID });
+      if (error) throw error;
+    },
+    async editDeadline(newDeadline, taskID) {
+      const { error } = await supabase
+        .from('tasks')
+        .update({ deadline: newDeadline })
         .match({ id: taskID });
       if (error) throw error;
     },

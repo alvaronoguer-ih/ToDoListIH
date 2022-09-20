@@ -1,6 +1,11 @@
+/* eslint-disable */
+
 <template>
   <div class="create-task-container">
     <h1>Time to create a new Task</h1>
+    <div class="deadline-area">
+      <input id="deadlineTask" type="date" v-model="due_date" aria-label="due date" />
+    </div>
     <textarea
       id="input-task-c"
       aria-label="title"
@@ -10,6 +15,7 @@
       maxlength="60"
     >
     </textarea>
+
     <button @click="handleNewTask">Create task</button>
   </div>
 </template>
@@ -36,11 +42,19 @@ export default {
       const taskData = {
         title: this.title,
         user_id: this.user.id,
+        deadline: this.due_date,
         isComplete: false,
       };
+      console.log(taskData);
       try {
-        await this.insertTask(taskData.title, taskData.user_id, taskData.isComplete);
+        await this.insertTask(
+          taskData.title,
+          taskData.user_id,
+          taskData.isComplete,
+          taskData.deadline
+        );
         document.getElementById('input-task-c').value = '';
+        document.getElementById('deadlineTask').value = '';
       } catch (error) {
         alert('No puedes crear una tarea en blanco');
       }
@@ -50,6 +64,10 @@ export default {
 </script>
 
 <style scoped>
+input {
+  color-scheme: dark;
+}
+
 .create-task-container {
   color: white;
   background-color: #2c3e50;
@@ -60,7 +78,9 @@ export default {
 
 .create-task-container h1 {
   font-size: 1.65rem;
-  padding: 4%;
+  padding-top: 6%;
+  padding-left: 6%;
+  text-align: left;
 }
 
 button {
@@ -78,7 +98,7 @@ textarea {
   width: 100%;
   padding-left: 6%;
   padding-right: 10%;
-  height: 100%;
+  height: 15vh;
   resize: none;
   outline: none;
   background-color: transparent;
@@ -89,5 +109,30 @@ textarea {
 
 textarea::placeholder {
   color: rgba(255, 255, 255, 0.384);
+}
+
+.deadline-area {
+  display: flex;
+  padding-left: 6%;
+  justify-content: flex-start;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#deadlineTask {
+  flex-direction: row-reverse;
+  height: 100%;
+  font-size: 1.2em;
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-bottom: 10px;
+  padding-left: 0;
+}
+#deadlineTask {
+  outline: none;
 }
 </style>

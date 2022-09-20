@@ -59,9 +59,12 @@ export default {
 
 .create-task {
   width: 35%;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .dashboard {
     width: 100%;
     margin: 0 auto;
@@ -77,6 +80,7 @@ export default {
   .create-task {
     margin: 0 auto;
     width: 90%;
+    position: inherit;
   }
 }
 </style>
