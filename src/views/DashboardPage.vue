@@ -5,6 +5,7 @@
       <ShowTasks />
     </div>
     <div class="create-task">
+      <ProfileInfo />
       <CreateTask />
     </div>
   </div>
@@ -14,11 +15,12 @@
 import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/task';
 import userStore from '@/store/user';
+import ProfileInfo from '@/components/ProfileInfo.vue';
 import ShowTasks from '../components/ShowTasks.vue';
 import CreateTask from '../components/CreateTask.vue';
 
 export default {
-  components: { ShowTasks, CreateTask },
+  components: { ShowTasks, CreateTask, ProfileInfo },
   name: 'DashboardPage',
   computed: {
     ...mapState(userStore, ['user']),
@@ -61,18 +63,20 @@ export default {
 
 @media (max-width: 600px) {
   .dashboard {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     flex-direction: column-reverse;
   }
 
   .your-tasks {
+    margin: 0 auto;
     margin-top: 3%;
-    width: 100%;
+    width: 90%;
   }
 
   .create-task {
-    width: 100%;
+    margin: 0 auto;
+    width: 90%;
   }
 }
 </style>

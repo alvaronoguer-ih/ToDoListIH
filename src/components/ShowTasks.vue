@@ -1,4 +1,14 @@
 <template>
+  <select
+    aria-label="selectingsort"
+    class="sortbyselector"
+    @change="onChange($event)"
+    name="sortby"
+  >
+    <option aria-label="bydate" value="value1" selected>By date</option>
+    <option aria-label="donefirst" value="value2">Done Tasks First</option>
+    <option aria-label="todofirst" value="value3">To-Do Tasks First</option>
+  </select>
   <div v-if="tasks.length" class="card-area">
     <div class="card" v-for="task in tasks" :key="task.id" :id="task.id">
       <div class="card-body">
@@ -30,7 +40,7 @@
     </div>
   </div>
   <div v-else>
-    <p>You have not created any task yet.</p>
+    <p class="no-tasks">You have not created any task yet.</p>
   </div>
 </template>
 
@@ -46,6 +56,24 @@ export default {
   methods: {
     ...mapActions(taskStore, ['deleteTask', 'editStatus', 'editTitle', 'fetchTasks']),
 
+    onChange(event) {
+      const selected = event.target.value;
+
+      switch (selected) {
+        case 'value1':
+          this.fetchTasks();
+          break;
+        case 'value2':
+          this.tasks = this.tasks.sort((a, b) => b.is_complete - a.is_complete);
+          break;
+        case 'value3':
+          this.tasks = this.tasks.sort((a, b) => a.is_complete - b.is_complete);
+          break;
+        default:
+          alert('Sorry, your option is not available');
+      }
+    },
+
     handleDeleteTask(taskId) {
       try {
         this.deleteTask(taskId);
@@ -58,13 +86,15 @@ export default {
     handleEditStatus(task, taskID) {
       try {
         this.editStatus(!task, taskID);
+        const findTask = this.tasks.find((element) => element.id === taskID);
+        findTask.is_complete = !task;
       } catch (error) {
+        console.alert(error);
         alert('Error: ', error.message);
       }
     },
 
     handleEditTitle(title, taskID) {
-      console.log(title, taskID);
       if (title.length !== 0) {
         this.editTitle(title, taskID);
       } else {
@@ -133,6 +163,7 @@ textarea {
   resize: none;
   outline: none;
   border-radius: 19px;
+  text-align: center;
 }
 
 textarea:focus {
@@ -145,6 +176,10 @@ textarea:focus {
   min-width: 47%;
   border-radius: 10px;
   border: none;
+}
+
+.no-tasks {
+  padding-top: 5%;
 }
 
 .card-body {
@@ -162,9 +197,28 @@ textarea:focus {
   display: inline;
 }
 
+.sortbyselector {
+  border: none;
+  border-bottom: solid black;
+  background-color: transparent;
+}
+
+.sortbyselector:focus {
+  outline: none;
+}
+
 @media (max-width: 600px) {
   .card {
     width: 100%;
+    margin-bottom: 3%;
+  }
+  .title-area {
+    height: 15vh;
+  }
+
+  .bton-status,
+  .btn-remove {
+    height: 8vh;
   }
 }
 </style>
