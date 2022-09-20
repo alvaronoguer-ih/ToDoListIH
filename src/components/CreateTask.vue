@@ -1,8 +1,14 @@
-/* eslint-disable */
-
 <template>
   <div class="create-task-container">
-    <h1>Time to create a new Task</h1>
+    <h1>New Task</h1>
+    <input
+      type="text"
+      id="descTaskCreate"
+      v-model="desc"
+      aria-label="desc"
+      placeholder="Title your task"
+      maxlength="20"
+    />
     <div class="deadline-area">
       <input id="deadlineTask" type="date" v-model="due_date" aria-label="due date" />
     </div>
@@ -41,6 +47,7 @@ export default {
     async handleNewTask() {
       const taskData = {
         title: this.title,
+        desc: this.desc,
         user_id: this.user.id,
         deadline: this.due_date,
         isComplete: false,
@@ -49,14 +56,33 @@ export default {
       try {
         await this.insertTask(
           taskData.title,
+          taskData.desc,
           taskData.user_id,
           taskData.isComplete,
-          taskData.deadline
+          taskData.deadline,
         );
         document.getElementById('input-task-c').value = '';
-        document.getElementById('deadlineTask').value = '';
+        document.getElementById('input-task-c').value = '';
+        document.getElementById('descTaskCreate').value = '';
+        this.$swal({
+          title: 'The task was created',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'success',
+        });
       } catch (error) {
-        alert('No puedes crear una tarea en blanco');
+        this.$swal({
+          title: "You can't leave the task empty",
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'warning',
+        });
       }
     },
   },
@@ -66,6 +92,11 @@ export default {
 <style scoped>
 input {
   color-scheme: dark;
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  color: white;
 }
 
 .create-task-container {
@@ -78,9 +109,10 @@ input {
 
 .create-task-container h1 {
   font-size: 1.65rem;
-  padding-top: 6%;
+  padding-top: 3%;
   padding-left: 6%;
   text-align: left;
+  font-weight: lighter;
 }
 
 button {
@@ -107,7 +139,8 @@ textarea {
   margin-bottom: 10px;
 }
 
-textarea::placeholder {
+textarea::placeholder,
+#descTaskCreate::placeholder {
   color: rgba(255, 255, 255, 0.384);
 }
 
@@ -122,17 +155,26 @@ textarea::placeholder {
   flex-wrap: nowrap;
 }
 
+#descTaskCreate {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 2em;
+  width: 100%;
+  padding-left: 6%;
+  font-weight: bold;
+}
+
 #deadlineTask {
   flex-direction: row-reverse;
   height: 100%;
   font-size: 1.2em;
   background-color: transparent;
   border: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.384);
   margin-bottom: 10px;
   padding-left: 0;
-}
-#deadlineTask {
   outline: none;
 }
 </style>

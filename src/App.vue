@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="menu-navbar">
-      <h1>🐙TwoDo</h1>
+      <h1>🐙 TwoDo</h1>
       <div v-if="user">
         <LogOut />
       </div>
@@ -35,9 +35,10 @@ export default {
   watch: {
     user() {
       if (!this.user) {
-        this.$router.push({ path: '/auth' });
-      } else {
         this.$router.push({ path: '/' });
+        console.log('no user');
+      } else {
+        this.$router.push({ path: '/dashboard' });
       }
     },
   },
@@ -46,6 +47,8 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -63,6 +66,7 @@ export default {
 
 .navbar h1 {
   color: white;
+  font-family: 'DM Serif Display', serif;
   user-select: none;
   margin-bottom: 0;
 }

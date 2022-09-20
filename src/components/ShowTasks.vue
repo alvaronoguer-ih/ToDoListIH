@@ -12,16 +12,23 @@
   <div v-if="tasks.length" class="card-area">
     <div class="card" v-for="task in tasks" :key="task.id" :id="task.id">
       <div class="card-body">
+        <div class="deadlineShow-zone">
+          <input
+            id="descTaskShow"
+            type="text"
+            v-model="task.desc"
+            aria-label="desc"
+            maxlength="20"
+          />
+          <input
+            id="deadlineTaskShow"
+            type="date"
+            v-model="task.deadline"
+            aria-label="due date"
+            @change="handleEditDeadline(task.deadline, task.id)"
+          />
+        </div>
         <div class="title-area">
-          <div class="deadlineShow-zone">
-            <input
-              id="deadlineTaskShow"
-              type="date"
-              v-model="task.deadline"
-              aria-label="due date"
-              @change="handleEditDeadline(task.deadline, task.id)"
-            />
-          </div>
           <textarea
             maxlength="60"
             aria-label="title"
@@ -35,7 +42,7 @@
             type="button"
             class="bton-status"
             :value="task.is_complete ? '🎉 Done' : 'To-Do'"
-            :style="task.is_complete ? 'background-color: #2a9d8f' : 'background-color: #e63946'"
+            :style="task.is_complete ? 'background-color: #2a9d8f' : 'background-color: #30343f'"
             @click="handleEditStatus(task.is_complete, task.id)"
           />
         </div>
@@ -100,7 +107,15 @@ export default {
     handleDeleteTask(taskId) {
       try {
         this.deleteTask(taskId);
-        alert('La tarea se ha eliminado correctamente');
+        this.$swal({
+          title: 'The task was deleted',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'success',
+        });
       } catch (error) {
         alert('Error: ', error.message);
       }
@@ -141,9 +156,8 @@ body {
 }
 
 .title-area {
-  background-color: #dbdbdb;
-  border-radius: 10px 10px 0px 0px;
-  height: 20vh;
+  background-color: #e5e5e5;
+  height: 15vh;
 }
 
 .card:hover {
@@ -153,24 +167,18 @@ body {
 .bton-status {
   border: none;
   width: 50%;
-  height: 6vh;
+  height: 4vh;
   border-radius: 0px 0px 0px 10px;
   color: white;
 }
 
 .btn-remove {
   border: none;
-  background-color: black;
+  background-color: #4f5d75;
   width: 50%;
-  height: 6vh;
+  height: 4vh;
   border-radius: 0px 0px 10px 0px;
   color: white;
-}
-
-.checkbox {
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
 }
 
 .card-area {
@@ -184,12 +192,11 @@ body {
 
 textarea {
   width: 100%;
+  height: 100%;
   padding-left: 10%;
   padding-right: 10%;
-  height: 100%;
   resize: none;
   outline: none;
-  border-radius: 19px;
   text-align: center;
 }
 
@@ -199,9 +206,7 @@ textarea:focus {
 
 .card {
   margin-top: 10%;
-  margin: 1%;
   min-width: 47%;
-  border-radius: 10px;
   border: none;
 }
 
@@ -239,20 +244,17 @@ input {
 }
 
 .deadlineShow-zone {
-  background-color: #797e84;
-  width: fit-content;
-  border-radius: 0px 0px 10px 10px;
-  margin-left: 8%;
+  background-color: #007ea7;
+  border-radius: 0px;
+  border-radius: 15px 15px 0px 0px;
 }
 
 #deadlineTaskShow {
-  padding-left: 3%;
-  border-radius: 15px 0px 15px 0px;
+  padding-left: 6%;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
   border: none;
-  padding-top: 2%;
   padding-bottom: 2%;
   background-color: transparent;
 }
@@ -261,7 +263,19 @@ input {
   outline: none;
 }
 
-@media (max-width: 600px) {
+#descTaskShow {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.5em;
+  width: 100%;
+  padding-left: 6%;
+  padding-top: 2%;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
   .card {
     width: 100%;
     margin-bottom: 3%;

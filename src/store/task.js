@@ -16,11 +16,17 @@ export default defineStore('tasks', {
       if (error) throw error;
       this.tasks = tasks;
     },
-    async insertTask(newTitle, userId, newStatus, deadlineDate) {
+    async insertTask(newTitle, newDesc, userId, newStatus, deadlineDate) {
       const { error } = await supabase
         .from('tasks')
         .insert([
-          { title: newTitle, user_id: userId, is_complete: newStatus, deadline: deadlineDate },
+          {
+            title: newTitle,
+            desc: newDesc,
+            user_id: userId,
+            is_complete: newStatus,
+            deadline: deadlineDate,
+          },
         ]);
       if (error) throw error;
       this.fetchTasks();
@@ -30,7 +36,7 @@ export default defineStore('tasks', {
       if (error) throw error;
       this.tasks.splice(
         this.tasks.findIndex((task) => task.id === taskId),
-        1
+        1,
       );
     },
 

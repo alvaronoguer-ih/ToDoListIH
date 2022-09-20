@@ -4,12 +4,15 @@ import DashboardPage from '../views/DashboardPage.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/dashboard',
     name: 'dashboard',
     component: DashboardPage,
+    meta: {
+      requiereAuth: true,
+    },
   },
   {
-    path: '/auth',
+    path: '/',
     name: 'auth',
     component: LoginPage,
   },

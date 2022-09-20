@@ -33,7 +33,15 @@ export default {
       try {
         await this.signInWithEmail(userData.email, userData.password);
       } catch (error) {
-        alert('Prueba otra vez');
+        this.$swal({
+          title: 'Wrong User or Password',
+          toast: true,
+          position: 'top-end',
+          timer: 4000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'fail',
+        });
       }
     },
     async handleSignUp() {
@@ -45,7 +53,15 @@ export default {
       try {
         await this.signUp(userData.email, userData.password);
       } catch (error) {
-        alert('Este usuario ya existe');
+        this.$swal({
+          title: 'User already registered',
+          toast: true,
+          position: 'top-end',
+          timer: 4000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'warning',
+        });
       }
     },
   },
@@ -120,6 +136,7 @@ export default {
   padding: 5%;
   border-radius: 20px;
   background-color: white;
+  box-shadow: #3e3e3e 0 10px 20px -10px;
 }
 
 #email-login,

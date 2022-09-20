@@ -54,7 +54,13 @@ export default {
   width: 60%;
   border-radius: 19px;
   padding: 5%;
+  background-color: white;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.your-tasks h1 {
+  font-family: 'DM Serif Display', serif;
+  color: #2c3e50;
 }
 
 .create-task {
