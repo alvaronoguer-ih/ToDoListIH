@@ -19,6 +19,7 @@
             v-model="task.desc"
             aria-label="desc"
             maxlength="20"
+            @change="handleEditDesc(task.desc, task.id)"
           />
           <input
             id="deadlineTaskShow"
@@ -76,6 +77,7 @@ export default {
       'editTitle',
       'fetchTasks',
       'editDeadline',
+      'editDesc',
     ]),
 
     onChange(event) {
@@ -93,6 +95,15 @@ export default {
           break;
         default:
           alert('Sorry, your option is not available');
+      }
+    },
+
+    handleEditDesc(desc, id) {
+      try {
+        this.editDesc(desc, id);
+      } catch (error) {
+        alert("You can't leave the description empty");
+        this.fetchTasks();
       }
     },
 
