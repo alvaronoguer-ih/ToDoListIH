@@ -8,11 +8,19 @@
     <option aria-label="bydate" value="value1" selected>By date</option>
     <option aria-label="donefirst" value="value2">Done Tasks First</option>
     <option aria-label="todofirst" value="value3">To-Do Tasks First</option>
+    <option aria-label="bydeadline" value="value4" selected>By deadline</option>
   </select>
   <div v-if="tasks.length" class="card-area">
     <div class="card" v-for="task in tasks" :key="task.id" :id="task.id">
       <div class="card-body">
-        <div class="deadlineShow-zone">
+        <div
+          class="deadlineShow-zone"
+          :style="
+            task.deadline < this.today && task.is_complete == false
+              ? 'background-color: #d88c9a'
+              : 'background-color: #184e77'
+          "
+        >
           <input
             id="descTaskShow"
             type="text"
@@ -21,11 +29,30 @@
             maxlength="20"
             @change="handleEditDesc(task.desc, task.id)"
           />
+          <p v-show="task.deadline < this.today && task.is_complete == false">Overdue</p>
+          <p
+            class="daysToGo"
+            v-show="
+              task.is_complete == false &&
+              task.deadline > this.today &&
+              calculateDays(task.deadline) < 8
+            "
+          >
+            {{ calculateDays(task.deadline) }} days left
+          </p>
+          <p class="daysToGo" v-show="task.is_complete == false && task.deadline == this.today">
+            Today
+          </p>
           <input
             id="deadlineTaskShow"
             type="date"
             v-model="task.deadline"
             aria-label="due date"
+            :style="
+              task.deadline < this.today && task.is_complete == false
+                ? 'background-color: #d88c9a'
+                : 'background-color: #184e77'
+            "
             @change="handleEditDeadline(task.deadline, task.id)"
           />
         </div>
@@ -70,6 +97,11 @@ export default {
   computed: {
     ...mapState(taskStore, ['tasks']),
   },
+  data() {
+    return {
+      today: new Date().toISOString().substr(0, 10),
+    };
+  },
   methods: {
     ...mapActions(taskStore, [
       'deleteTask',
@@ -79,6 +111,14 @@ export default {
       'editDeadline',
       'editDesc',
     ]),
+
+    calculateDays(taskdate) {
+      const date1 = new Date(taskdate);
+      const date2 = new Date();
+      const diffTime = Math.abs(date2 - date1);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    },
 
     onChange(event) {
       const selected = event.target.value;
@@ -93,11 +133,14 @@ export default {
         case 'value3':
           this.tasks = this.tasks.sort((a, b) => a.is_complete - b.is_complete);
           break;
+        case 'value4':
+          this.tasks = this.tasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+          break;
+
         default:
           alert('Sorry, your option is not available');
       }
     },
-
     handleEditDesc(desc, id) {
       try {
         this.editDesc(desc, id);
@@ -155,6 +198,7 @@ export default {
   watch: {
     tasks(state) {
       console.log(state);
+      console.log(this.today);
     },
   },
 };
@@ -171,6 +215,20 @@ body {
   height: 15vh;
 }
 
+p {
+  text-align: left;
+  color: white;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 6%;
+  font-weight: bold;
+}
+
+.daysToGo {
+  font-weight: normal;
+  padding-bottom: 0;
+}
+
 .card:hover {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -178,7 +236,7 @@ body {
 .bton-status {
   border: none;
   width: 50%;
-  height: 4vh;
+  height: 50px;
   border-radius: 0px 0px 0px 10px;
   color: white;
 }
@@ -187,7 +245,7 @@ body {
   border: none;
   background-color: #4f5d75;
   width: 50%;
-  height: 4vh;
+  height: 50px;
   border-radius: 0px 0px 10px 0px;
   color: white;
 }
@@ -217,7 +275,7 @@ textarea:focus {
 
 .card {
   margin-top: 10%;
-  min-width: 47%;
+  min-width: 49%;
   border: none;
 }
 

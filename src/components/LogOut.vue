@@ -21,7 +21,6 @@ export default {
 .btn-lo {
   background: #5e5df0;
   border-radius: 999px;
-  box-shadow: #5e5df0 0 10px 20px -10px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;

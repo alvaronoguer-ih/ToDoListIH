@@ -1,6 +1,5 @@
 <template>
   <div class="create-task-container">
-    <h1>New Task</h1>
     <input
       type="text"
       id="descTaskCreate"
@@ -164,6 +163,7 @@ textarea::placeholder,
   width: 100%;
   padding-left: 6%;
   font-weight: bold;
+  padding-top: 2%;
 }
 
 #deadlineTask {

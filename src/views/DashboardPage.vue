@@ -51,20 +51,21 @@ export default {
 }
 
 .your-tasks {
-  width: 60%;
+  width: 65%;
   border-radius: 19px;
   padding: 5%;
   background-color: white;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.your-tasks h1 {
+.your-tasks h1,
+.create-task h1 {
   font-family: 'DM Serif Display', serif;
   color: #2c3e50;
 }
 
 .create-task {
-  width: 35%;
+  width: 30%;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
