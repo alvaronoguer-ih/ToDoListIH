@@ -287,7 +287,10 @@ textarea:focus {
 }
 
 .no-tasks {
+  padding: 0;
   padding-top: 5%;
+  color: #4f5d75;
+  text-align: center;
 }
 
 .card-body {

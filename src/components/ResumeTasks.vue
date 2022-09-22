@@ -1,19 +1,22 @@
 <template>
-  <div>
+  <div v-if="tasks.length">
     <div class="resume-zone">
       <div class="task-to-do-resume">
-        <p>To-Do</p>
-        {{ taskToDo(this.tasks) }}
+        <h3>To-Do</h3>
+        <span>{{ taskToDo(this.tasks) }}</span>
       </div>
       <div class="task-done-resume">
-        <p>Done</p>
+        <h3>Done</h3>
         {{ taskDone(this.tasks) }}
       </div>
       <div class="task-overdue-resume">
-        <p>Overdue</p>
+        <h3>Overdue</h3>
         {{ taskOverdue(this.tasks) }}
       </div>
     </div>
+  </div>
+  <div class="resume-zone" v-else>
+    <h3>Create a task to start</h3>
   </div>
 </template>
 
@@ -54,13 +57,25 @@ export default {
 
 <style>
 .resume-zone {
+  padding: 1rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #30343f;
+  background-color: #b56576;
   border-radius: 15px;
   color: white;
+  font-family: 'DM Serif Display', serif;
+}
+
+span {
+  transition: --num 1s;
+}
+
+.task-to-do-resume,
+.task-done-resume,
+.task-overdue-resume {
+  font-size: 1.8em;
 }
 </style>
