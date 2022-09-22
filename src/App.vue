@@ -79,7 +79,7 @@ h2 {
 .menu-navbar {
   margin: 0 auto;
   display: flex;
-  width: 80%;
+  width: 90%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

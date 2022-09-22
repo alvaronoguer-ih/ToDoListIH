@@ -105,10 +105,13 @@ footer {
 
   .main-section {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .log-in-zone {
     width: 100%;
+    margin-top: 5%;
   }
 
   .copy-area h1 {

@@ -1,15 +1,19 @@
 <template>
   <div v-if="tasks.length">
     <div class="resume-zone">
-      <div class="task-to-do-resume">
+      <div class="task-today-resume" v-if="taskToday(this.tasks)">
+        <h3>Today</h3>
+        <span>{{ taskToday(this.tasks) }}</span>
+      </div>
+      <div class="task-to-do-resume" v-if="taskToDo(this.tasks)">
         <h3>To-Do</h3>
         <span>{{ taskToDo(this.tasks) }}</span>
       </div>
-      <div class="task-done-resume">
+      <div class="task-done-resume" v-if="taskDone(this.tasks)">
         <h3>Done</h3>
         {{ taskDone(this.tasks) }}
       </div>
-      <div class="task-overdue-resume">
+      <div class="task-overdue-resume" v-if="taskOverdue(this.tasks)">
         <h3>Overdue</h3>
         {{ taskOverdue(this.tasks) }}
       </div>
@@ -48,7 +52,13 @@ export default {
       const numberOfTask = totTask.filter(
         (task) => task.deadline < this.today && task.is_complete === false,
       );
-      console.log('Hola', numberOfTask);
+      return numberOfTask.length;
+    },
+
+    taskToday(totTask) {
+      const numberOfTask = totTask.filter(
+        (task) => task.deadline === this.today && task.is_complete === false,
+      );
       return numberOfTask.length;
     },
   },
@@ -63,7 +73,7 @@ export default {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #b56576;
+  background-color: #00afb9;
   border-radius: 15px;
   color: white;
   font-family: 'DM Serif Display', serif;
@@ -75,7 +85,8 @@ span {
 
 .task-to-do-resume,
 .task-done-resume,
-.task-overdue-resume {
+.task-overdue-resume,
+.task-today-resume {
   font-size: 1.8em;
 }
 </style>

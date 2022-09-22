@@ -163,7 +163,7 @@ textarea::placeholder,
   width: 100%;
   padding-left: 6%;
   font-weight: bold;
-  padding-top: 2%;
+  padding-top: 4%;
 }
 
 #deadlineTask {

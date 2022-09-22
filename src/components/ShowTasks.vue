@@ -1,5 +1,6 @@
 <template>
   <select
+    v-if="this.tasks"
     aria-label="selectingsort"
     class="sortbyselector"
     @change="onChange($event)"
@@ -18,7 +19,7 @@
           class="deadlineShow-zone"
           :style="
             task.deadline < this.today && task.is_complete == false
-              ? 'background-color: #d88c9a'
+              ? 'background-color: #b56576'
               : 'background-color: #184e77'
           "
         >
@@ -53,7 +54,7 @@
               aria-label="due date"
               :style="
                 task.deadline < this.today && task.is_complete == false
-                  ? 'background-color: #d88c9a'
+                  ? 'background-color: #b56576'
                   : 'background-color: #184e77'
               "
               @change="handleEditDeadline(task.deadline, task.id)"
@@ -234,6 +235,8 @@ p {
 .daysToGo {
   font-weight: normal;
   padding-bottom: 0;
+  background-color: #4f5d75;
+  border-radius: 40px;
 }
 
 .card:hover {

@@ -35,15 +35,27 @@ export default {
       try {
         await this.signInWithEmail(userData.email, userData.password);
       } catch (error) {
-        this.$swal({
-          title: 'Wrong User or Password',
-          toast: true,
-          position: 'top-end',
-          timer: 4000,
-          showConfirmButton: false,
-          timerProgressBar: true,
-          icon: 'fail',
-        });
+        if (!this.user) {
+          this.$swal({
+            title: 'This user does not exist',
+            toast: true,
+            position: 'top-end',
+            timer: 4000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            icon: 'fail',
+          });
+        } else {
+          this.$swal({
+            title: 'Wrong password',
+            toast: true,
+            position: 'top-end',
+            timer: 4000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            icon: 'fail',
+          });
+        }
       }
     },
     async handleSignUp() {
@@ -55,15 +67,17 @@ export default {
       try {
         await this.signUp(userData.email, userData.password);
       } catch (error) {
-        this.$swal({
-          title: 'User already registered',
-          toast: true,
-          position: 'top-end',
-          timer: 4000,
-          showConfirmButton: false,
-          timerProgressBar: true,
-          icon: 'warning',
-        });
+        if (this.user) {
+          this.$swal({
+            title: 'User already registered',
+            toast: true,
+            position: 'top-end',
+            timer: 4000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            icon: 'warning',
+          });
+        }
       }
     },
   },

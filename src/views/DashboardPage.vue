@@ -46,15 +46,19 @@ export default {
 </script>
 
 <style scoped>
+body {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
 .dashboard {
   padding-top: 50px;
   padding-bottom: 50px;
   display: flex;
+  width: 90%;
+  margin: 0 auto;
   flex-direction: row;
   align-items: center;
   align-items: flex-start;
   justify-content: space-around;
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .your-tasks {
