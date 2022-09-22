@@ -10,9 +10,11 @@
         <input type="password" id="password-login" name="password" placeholder="password" />
       </label>
 
-      <input class="btn-li" type="submit" value="Log in" @click="handleLogIn()" />
-      <div class="or">- or -</div>
-      <input class="btn-su" type="submit" id="login" value="Sign Up" @click="handleSignUp()" />
+      <div class="botons-area">
+        <input class="btn-li" type="submit" value="Log in" @click="handleLogIn()" />
+        <div class="or">- or -</div>
+        <input class="btn-su" type="submit" id="login" value="Sign Up" @click="handleSignUp()" />
+      </div>
     </div>
   </div>
 </template>
@@ -132,7 +134,6 @@ export default {
 }
 
 .login-text {
-  margin-top: 5%;
   padding: 5%;
   border-radius: 20px;
   background-color: white;
@@ -148,11 +149,36 @@ export default {
   border-top: none;
   border-left: none;
   border-right: none;
+  border-bottom: solid 1px;
 }
 
 #email-login:focus,
 #password-login:focus {
   outline: none;
   border-color: #219ebc;
+}
+
+@media (max-width: 800px) {
+  .login-text {
+    width: 100%;
+  }
+
+  .botons-area {
+    margin-top: 10%;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .or {
+    padding-top: 3%;
+  }
+
+  .btn-li {
+    margin-top: 0;
+  }
+  .btn-su {
+    margin-top: 0;
+  }
 }
 </style>

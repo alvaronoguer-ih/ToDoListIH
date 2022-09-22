@@ -67,5 +67,12 @@ export default defineStore('tasks', {
         .match({ id: taskID });
       if (error) throw error;
     },
+    async overdueTask(overdueStatus, taskID) {
+      const { error } = await supabase
+        .from('tasks')
+        .update({ overdue: overdueStatus })
+        .match({ id: taskID });
+      if (error) throw error;
+    },
   },
 });

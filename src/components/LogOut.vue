@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-lo" @click="handleLogOut()">Cerrar Sesión</button>
+  <button class="btn-lo" @click="handleLogOut()">Log Out</button>
 </template>
 
 <script>

@@ -1,6 +1,7 @@
 <template v-if="!user">
   <div class="bk">
     <div class="main-section">
+      <img class="iphone" src="../img/iphone.png" alt="iphone" />
       <div class="copy-area">
         <h1>Let's get things done</h1>
         <h2>TwoDo is the best app to manage your tasks and plan your future.</h2>
@@ -30,6 +31,11 @@ export default {
 </script>
 
 <style scoped>
+.iphone {
+  width: 15%;
+  margin-right: 3%;
+}
+
 .copy-area {
   text-align: left;
   width: 40%;
@@ -38,10 +44,14 @@ export default {
 .copy-area h1 {
   font-family: 'DM Serif Display', serif;
   font-size: 3.5em;
+  color: white;
+  user-select: none;
 }
 
 .copy-area h2 {
   color: white;
+  user-select: none;
+  font-size: 1.5em;
 }
 
 .main-section {
@@ -54,11 +64,12 @@ export default {
 }
 
 .bk {
-  padding-top: 5%;
   background-image: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg');
   background-position: center center;
   background-size: cover;
   height: 85vh;
+  padding-top: 0px;
+  display: flex;
 }
 
 .dashboard-zone {
@@ -73,7 +84,7 @@ export default {
   display: flex;
   width: 60%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
 }
 
@@ -81,5 +92,31 @@ footer {
   background-color: black;
   padding: 2%;
   height: 10vh;
+}
+
+@media (max-width: 800px) {
+  .iphone {
+    display: none;
+  }
+
+  .copy-area {
+    width: 100%;
+  }
+
+  .main-section {
+    flex-direction: column;
+  }
+
+  .log-in-zone {
+    width: 100%;
+  }
+
+  .copy-area h1 {
+    text-align: center;
+  }
+
+  .copy-area h2 {
+    display: none;
+  }
 }
 </style>

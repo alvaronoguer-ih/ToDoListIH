@@ -6,6 +6,7 @@
     </div>
     <div class="create-task">
       <ProfileInfo />
+      <ResumeTasks />
       <CreateTask />
     </div>
   </div>
@@ -16,11 +17,17 @@ import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/task';
 import userStore from '@/store/user';
 import ProfileInfo from '@/components/ProfileInfo.vue';
+import ResumeTasks from '@/components/ResumeTasks.vue';
 import ShowTasks from '../components/ShowTasks.vue';
 import CreateTask from '../components/CreateTask.vue';
 
 export default {
-  components: { ShowTasks, CreateTask, ProfileInfo },
+  components: {
+    ShowTasks,
+    CreateTask,
+    ProfileInfo,
+    ResumeTasks,
+  },
   name: 'DashboardPage',
   computed: {
     ...mapState(userStore, ['user']),

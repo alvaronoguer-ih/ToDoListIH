@@ -8,8 +8,9 @@
     <option aria-label="bydate" value="value1" selected>By date</option>
     <option aria-label="donefirst" value="value2">Done Tasks First</option>
     <option aria-label="todofirst" value="value3">To-Do Tasks First</option>
-    <option aria-label="bydeadline" value="value4" selected>By deadline</option>
+    <option aria-label="bydeadline" value="value4">By deadline</option>
   </select>
+
   <div v-if="tasks.length" class="card-area">
     <div class="card" v-for="task in tasks" :key="task.id" :id="task.id">
       <div class="card-body">
@@ -29,32 +30,35 @@
             maxlength="20"
             @change="handleEditDesc(task.desc, task.id)"
           />
-          <p v-show="task.deadline < this.today && task.is_complete == false">Overdue</p>
-          <p
-            class="daysToGo"
-            v-show="
-              task.is_complete == false &&
-              task.deadline > this.today &&
-              calculateDays(task.deadline) < 8
-            "
-          >
-            {{ calculateDays(task.deadline) }} days left
-          </p>
-          <p class="daysToGo" v-show="task.is_complete == false && task.deadline == this.today">
-            Today
-          </p>
-          <input
-            id="deadlineTaskShow"
-            type="date"
-            v-model="task.deadline"
-            aria-label="due date"
-            :style="
-              task.deadline < this.today && task.is_complete == false
-                ? 'background-color: #d88c9a'
-                : 'background-color: #184e77'
-            "
-            @change="handleEditDeadline(task.deadline, task.id)"
-          />
+          <div class="zona-deadline">
+            <p v-show="task.deadline < this.today && task.is_complete == false">Overdue</p>
+
+            <p
+              class="daysToGo"
+              v-show="
+                task.is_complete == false &&
+                task.deadline > this.today &&
+                calculateDays(task.deadline) < 8
+              "
+            >
+              {{ calculateDays(task.deadline) }} days left
+            </p>
+            <p class="daysToGo" v-show="task.is_complete == false && task.deadline == this.today">
+              Today
+            </p>
+            <input
+              id="deadlineTaskShow"
+              type="date"
+              v-model="task.deadline"
+              aria-label="due date"
+              :style="
+                task.deadline < this.today && task.is_complete == false
+                  ? 'background-color: #d88c9a'
+                  : 'background-color: #184e77'
+              "
+              @change="handleEditDeadline(task.deadline, task.id)"
+            />
+          </div>
         </div>
         <div class="title-area">
           <textarea
@@ -198,7 +202,6 @@ export default {
   watch: {
     tasks(state) {
       console.log(state);
-      console.log(this.today);
     },
   },
 };
@@ -213,6 +216,10 @@ body {
 .title-area {
   background-color: #e5e5e5;
   height: 15vh;
+}
+
+.zona-deadline {
+  display: flex;
 }
 
 p {
@@ -274,7 +281,7 @@ textarea:focus {
 }
 
 .card {
-  margin-top: 10%;
+  margin-top: 7%;
   min-width: 49%;
   border: none;
 }
@@ -337,11 +344,12 @@ input {
   border: none;
   outline: none;
   color: white;
-  font-size: 1.5em;
+  font-size: 1.7em;
   width: 100%;
   padding-left: 6%;
-  padding-top: 2%;
+  padding-top: 3%;
   font-weight: bold;
+  padding-bottom: 3%;
 }
 
 @media (max-width: 800px) {
