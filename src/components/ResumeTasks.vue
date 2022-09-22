@@ -73,7 +73,7 @@ export default {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #00afb9;
+  background-color: #5f5def;
   border-radius: 15px;
   color: white;
   font-family: 'DM Serif Display', serif;
@@ -88,5 +88,6 @@ span {
 .task-overdue-resume,
 .task-today-resume {
   font-size: 1.8em;
+  user-select: none;
 }
 </style>

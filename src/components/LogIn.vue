@@ -89,7 +89,6 @@ export default {
   margin-top: 10%;
   background: #f0ab5d;
   border-radius: 999px;
-  box-shadow: #f0ab5d 0 10px 20px -10px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
@@ -122,7 +121,6 @@ export default {
   margin-top: 5%;
   background: #5e5df0;
   border-radius: 999px;
-  box-shadow: #5e5df0 0 10px 20px -10px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
