@@ -61,7 +61,7 @@ export default {
           taskData.deadline,
         );
         document.getElementById('input-task-c').value = '';
-        document.getElementById('input-task-c').value = '';
+        taskData.deadline = '';
         document.getElementById('descTaskCreate').value = '';
         this.$swal({
           title: 'The task was created',

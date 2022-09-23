@@ -235,8 +235,6 @@ p {
 .daysToGo {
   font-weight: normal;
   padding-bottom: 0;
-  background-color: #4f5d75;
-  border-radius: 40px;
 }
 
 .card:hover {
