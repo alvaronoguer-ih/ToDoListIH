@@ -36,7 +36,6 @@ export default {
     user() {
       if (!this.user) {
         this.$router.push({ path: '/' });
-        console.log('no user');
       } else {
         this.$router.push({ path: '/dashboard' });
       }

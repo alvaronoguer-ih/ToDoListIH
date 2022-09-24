@@ -76,17 +76,7 @@ export default {
       try {
         await this.signUp(userData.email, userData.password);
       } catch (error) {
-        if (error.status === 400) {
-          this.$swal({
-            title: error.message,
-            toast: true,
-            position: 'top-end',
-            timer: 4000,
-            showConfirmButton: false,
-            timerProgressBar: true,
-            icon: 'warning',
-          });
-        } else if (error.status === 422) {
+        if (error.status) {
           this.$swal({
             title: error.message,
             toast: true,
@@ -189,7 +179,7 @@ export default {
   border-color: #219ebc;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 990px) {
   .login-text {
     width: 100%;
   }

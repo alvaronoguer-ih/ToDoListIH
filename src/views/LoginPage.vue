@@ -94,7 +94,7 @@ footer {
   height: 10vh;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 990px) {
   .iphone {
     display: none;
   }

@@ -1,4 +1,9 @@
 <template>
+  <div class="yourTasks-zone" v-if="tasks.length">
+    <h1>Your Tasks</h1>
+    <span class="numberTasks">{{ tasks.length }}</span>
+  </div>
+  <h1 v-else>Your dashboard</h1>
   <select
     v-if="this.tasks"
     aria-label="selectingsort"
@@ -20,7 +25,7 @@
           :style="
             task.deadline < this.today && task.is_complete == false
               ? 'background-color: #b56576'
-              : 'background-color: #184e77'
+              : 'background-color: #2c3e50'
           "
         >
           <input
@@ -55,7 +60,7 @@
               :style="
                 task.deadline < this.today && task.is_complete == false
                   ? 'background-color: #b56576'
-                  : 'background-color: #184e77'
+                  : 'background-color: #2c3e50'
               "
               @change="handleEditDeadline(task.deadline, task.id)"
             />
@@ -147,10 +152,18 @@ export default {
       }
     },
     handleEditDesc(desc, id) {
-      try {
+      if (desc.length !== 0) {
         this.editDesc(desc, id);
-      } catch (error) {
-        alert("You can't leave the description empty");
+      } else {
+        this.$swal({
+          title: 'You cannot leave the title empty',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'warning',
+        });
         this.fetchTasks();
       }
     },
@@ -195,7 +208,15 @@ export default {
       if (title.length !== 0) {
         this.editTitle(title, taskID);
       } else {
-        alert('No puedes dejar la tarea vacia');
+        this.$swal({
+          title: 'You can not leave the title empty',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'warning',
+        });
         this.fetchTasks();
       }
     },
@@ -356,7 +377,30 @@ input {
   padding-bottom: 3%;
 }
 
-@media (max-width: 800px) {
+.numberTasks {
+  background-color: #e63946;
+  border-radius: 50%;
+  display: block;
+  width: 25px;
+  height: 25px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1%;
+}
+
+.yourTasks-zone {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@media (max-width: 990px) {
   .card {
     width: 100%;
     margin-bottom: 3%;

@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard">
     <div class="your-tasks">
-      <h1>Your Tasks</h1>
       <ShowTasks />
     </div>
     <div class="create-task">
@@ -82,7 +81,7 @@ body {
   top: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 990px) {
   .dashboard {
     width: 100%;
     margin: 0 auto;
