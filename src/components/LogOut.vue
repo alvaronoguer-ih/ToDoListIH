@@ -12,6 +12,15 @@ export default {
     ...mapActions(userStore, ['signOut']),
     async handleLogOut() {
       await this.signOut();
+      this.$swal({
+        title: 'Logged out. See you soon!',
+        toast: true,
+        position: 'top-end',
+        timer: 4000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        icon: 'success',
+      });
     },
   },
 };

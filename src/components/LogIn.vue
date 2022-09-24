@@ -3,7 +3,7 @@
     <h2>Welcome to TwoDo</h2>
     <div class="login-area-form">
       <label aria-controls="email" for="email"
-        ><input type="email" id="email-login" name="email" placeholder="email"
+        ><input type="email" id="email-login" name="email" placeholder="email" v-model="email"
       /></label>
 
       <label for="password">
@@ -26,7 +26,7 @@ import userStore from '@/store/user';
 export default {
   name: 'LogIn',
   methods: {
-    ...mapActions(userStore, ['signInWithEmail', 'signUp']),
+    ...mapActions(userStore, ['signInWithEmail', 'signUp', 'signInMagic']),
     async handleLogIn() {
       const userData = {
         email: document.getElementById('email-login').value,
@@ -34,26 +34,36 @@ export default {
       };
       try {
         await this.signInWithEmail(userData.email, userData.password);
+        this.$swal({
+          title: `Welcome back ${userData.email}`,
+          toast: true,
+          position: 'top-end',
+          timer: 4000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          icon: 'success',
+        });
       } catch (error) {
-        if (!this.user) {
+        console.log(error);
+        if (error.status === 400) {
           this.$swal({
-            title: 'This user does not exist',
+            title: error.message,
             toast: true,
             position: 'top-end',
             timer: 4000,
             showConfirmButton: false,
             timerProgressBar: true,
-            icon: 'fail',
+            icon: 'error',
           });
         } else {
           this.$swal({
-            title: 'Wrong password',
+            title: 'Email and password required',
             toast: true,
             position: 'top-end',
             timer: 4000,
             showConfirmButton: false,
             timerProgressBar: true,
-            icon: 'fail',
+            icon: 'warning',
           });
         }
       }
@@ -63,13 +73,22 @@ export default {
         email: document.getElementById('email-login').value,
         password: document.getElementById('password-login').value,
       };
-      console.log(userData.email);
       try {
         await this.signUp(userData.email, userData.password);
       } catch (error) {
-        if (this.user) {
+        if (error.status === 400) {
           this.$swal({
-            title: 'User already registered',
+            title: error.message,
+            toast: true,
+            position: 'top-end',
+            timer: 4000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            icon: 'warning',
+          });
+        } else if (error.status === 422) {
+          this.$swal({
+            title: error.message,
             toast: true,
             position: 'top-end',
             timer: 4000,
