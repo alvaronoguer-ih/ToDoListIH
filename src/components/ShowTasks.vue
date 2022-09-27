@@ -291,7 +291,7 @@ p {
 textarea {
   width: 100%;
   height: 100%;
-  padding-left: 10%;
+  padding-left: 6%;
   padding-right: 10%;
   resize: none;
   outline: none;
