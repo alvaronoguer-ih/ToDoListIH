@@ -51,7 +51,6 @@ export default {
         deadline: this.due_date,
         isComplete: false,
       };
-      console.log(taskData);
       try {
         await this.insertTask(
           taskData.title,

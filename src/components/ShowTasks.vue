@@ -26,6 +26,7 @@
         role="switch"
         id="flexSwitchCheckChecked"
         @change="onChangeStatus($event, this.tasks)"
+        v-model="showDetails"
         :aria-checked="true"
         checked
       />
@@ -250,11 +251,6 @@ export default {
         });
         this.fetchTasks();
       }
-    },
-  },
-  watch: {
-    tasks(state) {
-      console.log(state);
     },
   },
 };

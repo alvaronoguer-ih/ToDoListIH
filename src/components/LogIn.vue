@@ -44,7 +44,6 @@ export default {
           icon: 'success',
         });
       } catch (error) {
-        console.log(error);
         if (error.status === 400) {
           this.$swal({
             title: error.message,

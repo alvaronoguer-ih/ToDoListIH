@@ -132,4 +132,10 @@ footer {
     display: none;
   }
 }
+
+@media (min-width: 1200px) {
+  .main-section {
+    width: 60%;
+  }
+}
 </style>
