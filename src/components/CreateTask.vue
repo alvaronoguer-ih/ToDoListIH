@@ -16,7 +16,7 @@
       aria-label="title"
       v-model="title"
       required
-      placeholder="Plan a task"
+      placeholder="A little bit more about your task"
       maxlength="60"
     >
     </textarea>

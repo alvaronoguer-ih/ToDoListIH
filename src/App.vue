@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="menu-navbar">
-      <h1>🐙 TwoDo</h1>
+      <h1>TwoDo</h1>
       <div v-if="user">
         <LogOut />
       </div>
@@ -46,7 +46,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
 #app {
@@ -65,8 +65,12 @@ export default {
 
 .navbar h1 {
   color: white;
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
   user-select: none;
+  letter-spacing: -3px;
   margin-bottom: 0;
 }
 

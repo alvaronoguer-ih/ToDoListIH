@@ -16,6 +16,22 @@
     <option aria-label="todofirst" value="value3">To-Do Tasks First</option>
     <option aria-label="bydeadline" value="value4">By deadline</option>
   </select>
+  <br />
+
+  <div class="form-check form-switch" v-if="tasks.length">
+    <label class="form-check-label" for="flexSwitchCheckChecked" aria-controls="details">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckChecked"
+        @change="onChangeStatus($event, this.tasks)"
+        :aria-checked="true"
+        checked
+      />
+      Show tasks details</label
+    >
+  </div>
 
   <div v-if="tasks.length" class="card-area">
     <div class="card" v-for="task in tasks" :key="task.id" :id="task.id">
@@ -34,6 +50,7 @@
             v-model="task.desc"
             aria-label="desc"
             maxlength="20"
+            :style="task.is_complete ? 'text-decoration: line-through' : ''"
             @change="handleEditDesc(task.desc, task.id)"
           />
           <div class="zona-deadline">
@@ -121,6 +138,20 @@ export default {
       'editDeadline',
       'editDesc',
     ]),
+
+    onChangeStatus(event, tasks) {
+      const { checked } = event.target;
+      let i = 0;
+      if (!checked) {
+        for (i = 0; i < tasks.length; i += 1) {
+          document.getElementsByClassName('title-area')[i].style.display = 'none';
+        }
+      } else {
+        for (i = 0; i < tasks.length; i += 1) {
+          document.getElementsByClassName('title-area')[i].style.display = 'inherit';
+        }
+      }
+    },
 
     calculateDays(taskdate) {
       const date1 = new Date(taskdate);
@@ -244,6 +275,10 @@ body {
   display: flex;
 }
 
+h1 {
+  font-family: 'DM Serif Display', serif;
+}
+
 p {
   text-align: left;
   color: white;
@@ -282,7 +317,6 @@ p {
 .card-area {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 20px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -334,6 +368,7 @@ textarea:focus {
   border: none;
   border-bottom: solid black;
   background-color: transparent;
+  margin-bottom: 2%;
 }
 
 .sortbyselector:focus {
@@ -400,6 +435,11 @@ input {
   justify-content: center;
 }
 
+.form-check {
+  width: 40%;
+  margin: 0 auto;
+}
+
 @media (max-width: 990px) {
   .card {
     width: 100%;
@@ -412,6 +452,15 @@ input {
   .bton-status,
   .btn-remove {
     height: 7vh;
+  }
+
+  .form-check {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .sortbyselector {
+    margin-bottom: 5%;
   }
 }
 </style>

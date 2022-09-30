@@ -3,7 +3,7 @@
     <div class="main-section">
       <img class="iphone" src="../img/iphone.png" alt="iphone" />
       <div class="copy-area">
-        <h1>Let's get things done</h1>
+        <h1>Let's get things <span class="lined">done</span></h1>
         <h2>TwoDo is the best app to manage your tasks and plan your future.</h2>
       </div>
       <div class="log-in-zone">
@@ -39,6 +39,16 @@ export default {
 .copy-area {
   text-align: left;
   width: 40%;
+}
+
+.lined {
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
+  user-select: none;
+  font-size: 1.2em;
+  letter-spacing: -4px;
 }
 
 .copy-area h1 {

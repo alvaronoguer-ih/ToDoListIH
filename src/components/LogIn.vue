@@ -1,6 +1,6 @@
 <template>
   <div class="login-text">
-    <h2>Welcome to TwoDo</h2>
+    <h2>Welcome to <span class="lined">TwoDo</span></h2>
     <div class="login-area-form">
       <label aria-controls="email" for="email"
         ><input type="email" id="email-login" name="email" placeholder="email" v-model="email"
@@ -94,6 +94,16 @@ export default {
 </script>
 
 <style>
+.lined {
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
+  user-select: none;
+  font-size: 1.2em;
+  letter-spacing: -4px;
+}
+
 .btn-li {
   margin-top: 10%;
   background: #f0ab5d;
