@@ -1,5 +1,5 @@
 <template>
-  <div v-if="tasks.length">
+  <div v-if="tasks.length !== taskDone(this.tasks)">
     <div class="resume-zone">
       <div class="task-today-resume" v-if="taskToday(this.tasks)">
         <h3>Today</h3>
@@ -18,6 +18,9 @@
         {{ taskOverdue(this.tasks) }}
       </div>
     </div>
+  </div>
+  <div class="resume-zone" v-else-if="taskDone(this.tasks) === tasks.length">
+    <h3>Yeyyy! You have no pending tasks.</h3>
   </div>
   <div class="resume-zone" v-else>
     <h3>Create a task to start</h3>

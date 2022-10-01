@@ -154,6 +154,8 @@ textarea::placeholder,
 }
 
 #descTaskCreate {
+  font-family: 'DM Serif Display', serif;
+
   background-color: transparent;
   border: none;
   outline: none;
